@@ -39,29 +39,6 @@
 
 <body>
 
-    <?php
-    
-    \Stripe\Stripe::setApiKey("sk_test_miQZuCaoNdQjuyD3gusVssyG");
-
-    // Get the credit card details submitted by the form
-    $token = $_POST['stripeToken'];
-
-    // Create the charge on Stripe's servers - this will charge the user's card
-    $amount = 2000;
-    try {
-     $charge = \Stripe\Charge::create(array(
-       "amount" => $amount, // amount in cents, again
-       "currency" => "cad",
-       "source" => $token,
-       "description" => "Example charge"
-       ));
-    } catch(\Stripe\Error\Card $e) {
-     // The card has been declined
-    }
-
-
-    ?>
-
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -409,9 +386,95 @@
             <p><textarea name="Comment" cols="55" rows="5"></textarea></p>
             <p><input type="submit" value="Submit"></p>
         </form>
-    </div>
+        </div>
 
     </div>
+
+
+    <?php
+    
+    // Check for a form submission:
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        // Stores errors:
+        $errors = array();
+
+        // Need a payment token:
+        if (isset($_POST['stripeToken'])) {
+
+            $token = $_POST['stripeToken'];
+
+            // Check for a duplicate submission, just in case:
+            // Uses sessions, you could use a cookie instead.
+            if (isset($_SESSION['token']) && ($_SESSION['token'] == $token)) {
+                $errors['token'] = 'You have apparently resubmitted the form. Please do not do that.';
+            } else { // New submission.
+                $_SESSION['token'] = $token;
+            }
+
+        } else {
+            $errors['token'] = 'The order cannot be processed. Please make sure you have JavaScript enabled and try again.';
+        }
+
+        // Set the order amount somehow:
+        $amount = 2000; // $20, in cents
+
+        // Validate other form data!
+
+        // If no errors, process the order:
+        if (empty($errors)) {
+
+            // create the charge on Stripe's servers - this will charge the user's card
+            try {
+
+                // Include the Stripe library:
+                // Assumes you've installed the Stripe PHP library using Composer!
+                require_once('vendor/autoload.php');
+
+                // set your secret key: remember to change this to your live secret key in production
+                // see your keys here https://manage.stripe.com/account
+                \Stripe\Stripe::setApiKey(STRIPE_PRIVATE_KEY);
+
+                // Charge the order:
+                $charge = \Stripe\Charge::create(array(
+                    "amount" => $amount, // amount in cents, again
+                    "currency" => "usd",
+                    "source" => $token,
+                    "description" => $email
+                    )
+                );
+
+                // Check that it was paid:
+                if ($charge->paid == true) {
+
+                    // Store the order in the database.
+                    // Send the email.
+                    // Celebrate!
+
+                } else { // Charge was not paid!
+                    echo '<div class="alert alert-error"><h4>Payment System Error!</h4>Your payment could NOT be processed (i.e., you have not been charged) because the payment system rejected the transaction. You can try again or use another card.</div>';
+                }
+
+            } catch (\Stripe\Error\Card $e) {
+                // Card was declined.
+                $e_json = $e->getJsonBody();
+                $err = $e_json['error'];
+                $errors['stripe'] = $err['message'];
+            } catch (\Stripe\Error\ApiConnection $e) {
+                // Network problem, perhaps try again.
+            } catch (\Stripe\Error\InvalidRequest $e) {
+                // You screwed up in your programming. Shouldn't happen!
+            } catch (\Stripe\Error\Api $e) {
+                // Stripe's servers are down!
+            } catch (\Stripe\Error\Base $e) {
+                // Something else that's not the customer's fault.
+            }
+
+        } // A user form submission error occurred, handled below.
+
+    } // Form submission.
+
+    ?>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
