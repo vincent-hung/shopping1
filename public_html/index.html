@@ -44,19 +44,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Blue Clothing & Leather</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
+                        <a href="#cart">Shopping Cart</a>
                     </li>
                     <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <a href="#contact">Contact Us</a>
                     </li>
                 </ul>
             </div>
@@ -71,7 +68,7 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Shop Name</p>
+                <p id="title" class="lead">Blue Clothing & Leather</p>
 
             </div>
 
@@ -88,13 +85,13 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="item active">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/shop1.jpg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/shop2.jpeg" alt="">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                                    <img class="slide-image" src="img/shop3.jpg" alt="">
                                 </div>
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
@@ -325,10 +322,10 @@
     <!-- /.container -->
 
 
-    <div class="container">
+    <div class="container" id="cart">
 
         <div class="col-md-3">
-            <h1 class="lead">Shopping Cart</h1>
+            <h1 id="shop" class="lead">Shopping Cart</h1>
         </div>
 
         <div class="col-md-9">
@@ -345,12 +342,15 @@
             <p id = "tax">Tax: $0.00</p>
             <p id = "total">Total: $0.00</p>
         </div>
+        <br>
+        <br>
+        <br>
     </div>
 
-    <div class="container">
+    <div class="container" id="contact">
 
         <div class="col-md-3">
-            <h1 class="lead">Shopping Cart</h1>
+            <h1 id="con" class="lead">Contact Us</h1>
         </div>
 
         <div class="col-md-9">
@@ -362,7 +362,7 @@
             id="Comment"></textarea></p>
             <p><input type="submit" name="Submit" value="Submit"></p>
         </form>
-</div>
+    </div>
 
     </div>
 
@@ -372,10 +372,11 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.4.min.js"></script>
         <script type="text/javascript" src="fancybox/jquery.easing-1.3.pack.js"></script>
         <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.js"></script>
         <script type="text/javascript" src="cloud-zoom/cloud-zoom.1.0.2.js"></script>
+        <script type="text/javascript" src="js/jquery-migrate-1.2.1.js"></script>
         <script type="text/javascript">
             $(function() {
                 /*

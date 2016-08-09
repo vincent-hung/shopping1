@@ -6,6 +6,7 @@
 
 body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    background-color: #d9f7f7;
 }
 
 .slide-image {
@@ -42,6 +43,7 @@ body {
 
 .thumbnail {
     padding: 0;
+    background-color: #afeeee;
 }
 
 .thumbnail .caption-full {
@@ -75,4 +77,10 @@ body {
     width:211px;
     height:150px;
     overflow:hidden;
+}
+
+#title,
+#shop,
+#con{
+    color:#008385;
 }
