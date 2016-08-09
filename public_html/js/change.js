@@ -149,8 +149,8 @@ function calculate(){
 	document.getElementById("subtotal").innerHTML = "Subtotal: $" + subtotal;
 	document.getElementById("tax").innerHTML = "Tax: $" + tax;
 	document.getElementById("total").innerHTML = "Total: $" + total;
+}
 
-	var to = total*100;
-	$('.stripe-button').attr('data-amount', to);
-
+function getC(){
+	return total*100;
 }

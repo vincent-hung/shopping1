@@ -346,17 +346,33 @@
         <br>
         <br>
 
-    <form action="" method="POST" id="checkout">
-      <script
-        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
-        data-amount="0"
-        data-name="Blue Clothing & Leather"
-        data-description="Card"
-        data-image="/img/documentation/checkout/marketplace.png"
-        data-locale="auto">
-      </script>
-    </form>
+        <form action="" method="POST">
+        <button id="customButton" class="btn btn-primary">Pay</button>
+    
+        <script>
+               $('#customButton').click(function(){
+                 var token = function(res){
+                   var $input = $('<input type=hidden name=stripeToken />').val(res.id);
+                   $('form').append($input).submit();
+                 };
+
+                   var cost;
+                   var cost = getC();
+                
+                 StripeCheckout.open({
+                   key:         'pk_test_O4pwxsOKukpCDGYSWmFJvYp3',
+                   amount:      cost,
+                   currency:    'cad',
+                   name:        'Blue Clothing & Leather',
+                   description: 'Card Payment',
+                   panelLabel:  'Checkout',
+                   token:       token
+                 });
+
+                 return false;
+               });
+             </script>
+             </form>
     </div>
 
     <div class="container" id="contact">
