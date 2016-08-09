@@ -433,7 +433,7 @@
 
                 // set your secret key: remember to change this to your live secret key in production
                 // see your keys here https://manage.stripe.com/account
-                \Stripe\Stripe::setApiKey(STRIPE_PRIVATE_KEY);
+                \Stripe\Stripe::setApiKey(sk_test_miQZuCaoNdQjuyD3gusVssyG);
 
                 // Charge the order:
                 $charge = \Stripe\Charge::create(array(
