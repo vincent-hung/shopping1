@@ -1,40 +1,86 @@
 
-$(document).ready(function() {
-	var $form = $('#payment-form');
+function reportError(msg) {
 
-	$form.submit(function(event) {
-
-		// Disable the submit button to prevent repeated clicks:
-	$form.find('.submit').prop('disabled', true);
-
-	// Request a token from Stripe:
-	Stripe.card.createToken($form, stripeResponseHandler);
-
-    // Prevent the form from being submitted:
+	$('#payment-errors').text(msg).addClass('alert alert-error');
+	$('#submitBtn').prop('disabled', false);
 	return false;
-	}); 
-}); // Document ready.
+}
+
+$(document).ready(function() {
+
+	// Watch for a form submission:
+	$("#payment-form").submit(function(event) {
+
+		// Flag variable:
+		var error = false;
+
+		// disable the submit button to prevent repeated clicks:
+		$('#submitBtn').attr("disabled", "disabled");
+
+		// Get the values:
+		var ccNum = $('.card-number').val(), cvcNum = $('.card-cvc').val(), expMonth = $('.card-expiry-month').val(), expYear = $('.card-expiry-year').val();
+
+		// Validate the number:
+		if (!Stripe.card.validateCardNumber(ccNum)) {
+			error = true;
+			reportError('The credit card number appears to be invalid.');
+		}
+
+		// Validate the CVC:
+		if (!Stripe.card.validateCVC(cvcNum)) {
+			error = true;
+			reportError('The CVC number appears to be invalid.');
+		}
+
+		// Validate the expiration:
+		if (!Stripe.card.validateExpiry(expMonth, expYear)) {
+			error = true;
+			reportError('The expiration date appears to be invalid.');
+		}
+
+		// Validate other form elements, if needed!
+
+		// Check for errors:
+		if (!error) {
+
+			// Get the Stripe token:
+			Stripe.card.createToken({
+				number: ccNum,
+				cvc: cvcNum,
+				exp_month: expMonth,
+				exp_year: expYear
+			}, stripeResponseHandler);
+
+		}
+
+		// Prevent the form from submitting:
+		return false;
+
+	}); // Form submission
+
+});
 
 // Function handles the Stripe response:
 function stripeResponseHandler(status, response) {
-	// Grab the form:
-	var $form = $('#payment-form');
 
-	if (response.error) { // Problem!
+	// Check for an error:
+	if (response.error) {
 
-	 	// Show the errors on the form:
-	    $form.find('.payment-errors').text(response.error.message);
-	    $form.find('.submit').prop('disabled', false); // Re-enable submission
+		reportError(response.error.message);
 
-	} else { // Token was created!
+	} else { // No errors, submit the form:
 
-	    // Get the token ID:
-	    var token = response.id;
+	  var f = $("#payment-form");
 
-	    // Insert the token ID into the form so it gets submitted to the server:
-	    $form.append($('<input type="hidden" name="stripeToken">').val(token));
+	  // Token contains id, last4, and card type:
+	  var token = response['id'];
 
-	    // Submit the form:
-	    $form.get(0).submit();
+	  // Insert the token into the form so it gets submitted to the server
+	  f.append("<input type='hidden' name='stripeToken' value='" + token + "' />");
+
+	  // Submit the form:
+	  f.get(0).submit();
+
 	}
-}
+
+} // End of stripeResponseHandler() function.

@@ -12,6 +12,6 @@
   "require": {
     "sendgrid/sendgrid": "5.0.4",
     "parse/php-sdk": "1.2.1",
-    "stripe/stripe-php": "3.*"
+    "stripe/stripe-php": "2.*"
   }
 }
