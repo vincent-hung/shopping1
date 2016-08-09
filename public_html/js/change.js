@@ -150,6 +150,7 @@ function calculate(){
 	document.getElementById("tax").innerHTML = "Tax: $" + tax;
 	document.getElementById("total").innerHTML = "Total: $" + total;
 
+	var to = total*100;
+	$('.stripe-button').attr('data-amount', to);
 
 }
-

@@ -18,12 +18,6 @@
     <link href="css/shop-homepage.css" rel="stylesheet">
 
     <script src="js/change.js"></script>
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script type="text/javascript">
-      Stripe.setPublishableKey('pk_test_O4pwxsOKukpCDGYSWmFJvYp3');
-    </script>
-
-
 
     <link rel="stylesheet" type="text/css" href="cloud-zoom/cloud-zoom.css" />
     <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox-1.3.4.css" />
@@ -351,24 +345,17 @@
         <br>
         <br>
         <br>
-    </div>
 
-
-    <div class="container">
-    <form action="index.php" method="POST" id="payment-form">
-      <span class="payment-errors"></span>
-
-      <label>Card Number</label>
-            <input type="text" size="20" autocomplete="off" class="card-number input-medium">
-            <span class="help-block">Enter the number without spaces or hyphens.</span>
-            <label>CVC</label>
-            <input type="text" size="4" autocomplete="off" class="card-cvc input-mini">
-            <label>Expiration (MM/YYYY)</label>
-            <input type="text" size="2" class="card-expiry-month input-mini">
-            <span> / </span>
-            <input type="text" size="4" class="card-expiry-year input-mini">
-
-            <button type="submit" class="btn" id="submitBtn">Submit Payment</button>
+    <form action="" method="POST" id="checkout">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh"
+        data-amount="0"
+        data-name="Blue Clothing & Leather"
+        data-description="Card"
+        data-image="/img/documentation/checkout/marketplace.png"
+        data-locale="auto">
+      </script>
     </form>
     </div>
 
@@ -392,79 +379,24 @@
 
 
     <?php
-
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        // Stores errors:
-        $errors = array();
-
-        // Need a payment token:
-        if (isset($_POST['stripeToken'])) {
-
-            $token = $_POST['stripeToken'];
-
-            if (isset($_SESSION['token']) && ($_SESSION['token'] == $token)) {
-                $errors['token'] = 'You have apparently resubmitted the form. Please do not do that.';
-            } else { // New submission.
-                $_SESSION['token'] = $token;
-            }
-
-        } else {
-            $errors['token'] = 'The order cannot be processed. Please make sure you have JavaScript enabled and try again.';
-        }
-
-    
-    $amount = 2000; // $20, in cents
-
-    if (empty($errors)) {
-
-        try {
-
-            require_once('path/to/stripe-php/init.php');
-
-             \Stripe\Stripe::setApiKey('sk_test_BQokikJOvBiI2HlWgH4olfQ2');
+    // Set your secret key: remember to change this to your live secret key in production
+    // See your keys here https://dashboard.stripe.com/account/apikeys
+    \Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");
 
     // Get the credit card details submitted by the form
     $token = $_POST['stripeToken'];
 
-  // Charge the order:
-            $charge = \Stripe\Charge::create(array(
-                "amount" => $amount, // amount in cents, again
-                "currency" => "usd",
-                "source" => $token,
-                "description" => $email
-                )
-            );
-
-            // Check that it was paid:
-            if ($charge->paid == true) {
-
-                // Store the order in the database.
-                // Send the email.
-                // Celebrate!
-
-            } else { // Charge was not paid!
-                echo '<div class="alert alert-error"><h4>Payment System Error!</h4>Your payment could NOT be processed (i.e., you have not been charged) because the payment system rejected the transaction. You can try again or use another card.</div>';
-            }
-
-        } catch (\Stripe\Error\Card $e) {
-            // Card was declined.
-            $e_json = $e->getJsonBody();
-            $err = $e_json['error'];
-            $errors['stripe'] = $err['message'];
-        } catch (\Stripe\Error\ApiConnection $e) {
-            // Network problem, perhaps try again.
-        } catch (\Stripe\Error\InvalidRequest $e) {
-            // You screwed up in your programming. Shouldn't happen!
-        } catch (\Stripe\Error\Api $e) {
-            // Stripe's servers are down!
-        } catch (\Stripe\Error\Base $e) {
-            // Something else that's not the customer's fault.
-        }
-
-    } // A user form submission error occurred, handled below.
-
-} // Form submission.
+    // Create the charge on Stripe's servers - this will charge the user's card
+    try {
+      $charge = \Stripe\Charge::create(array(
+        "amount" => 1000, // amount in cents, again
+        "currency" => "cad",
+        "source" => $token,
+        "description" => "Example charge"
+        ));
+    } catch(\Stripe\Error\Card $e) {
+      // The card has been declined
+    }
 
     ?>
 
@@ -473,8 +405,6 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="js/buy.js"></script>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.4.4.min.js"></script>
         <script type="text/javascript" src="fancybox/jquery.easing-1.3.pack.js"></script>

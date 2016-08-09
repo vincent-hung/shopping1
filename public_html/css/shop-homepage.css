@@ -84,3 +84,7 @@ body {
 #con{
     color:#008385;
 }
+
+#checkout{
+    float: right;
+}
