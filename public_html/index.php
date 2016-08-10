@@ -350,7 +350,6 @@
             data-amount="999"
             data-name="Blue Clothing & Leather"
             data-description="Card Payment"
-            data-image="/img/documentation/checkout/marketplace.png"
             data-locale="auto"
             data-currency="cad">
           </script>
