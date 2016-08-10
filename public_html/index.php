@@ -338,12 +338,38 @@
             <p id = "watchbuy"></p>
             <br>
             
-            <p id = "subtotal">Subtotal: $0.00</p>
-            <p id = "tax">Tax: $0.00</p>
-            <p id = "total">Total: $0.00</p>
+            <p id = "subtotal">Subtotal: $<input id="textField1" type="text" value="0.00" align="right" size="13" disabled="true"/></span></p>
+            <p id = "tax">Tax: $<input id="textField2" type="text" value="0.00" align="right" size="13" disabled="true"/></span></p>
+            <p id = "total">Total: $<span>
+            <input id="textField3" type="text" value="0.00" align="right" size="13" disabled="true"/></span></p>
 
 
-        <form action="" method="POST">
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <button id="customButton ">Purchase</button>
+    <script>
+      var handler = StripeCheckout.configure({
+        key: 'pk_test_O4pwxsOKukpCDGYSWmFJvYp3',
+        token: function(token) {
+          // Use the token to create the charge with a server-side script.
+          // You can access the token ID with `token.id`
+        }
+      });
+
+      document.getElementById('customButton').addEventListener('click', function(e) {
+        // This line is the only real modification...
+        var amount = $("#textField3").val() * 100;
+        handler.open({
+          name: "Blue Clothing & Leather",
+          description: "Card Payment",
+          // ... aside from this line where we use the value.
+          amount: amount
+        });
+        e.preventDefault();
+      });
+    </script>
+
+       <!--  <form action="" method="POST">
           <script
             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
             data-key="pk_test_O4pwxsOKukpCDGYSWmFJvYp3"
@@ -353,7 +379,7 @@
             data-locale="auto"
             data-currency="cad">
           </script>
-        </form>
+        </form> -->
          </div>
     </div>
 

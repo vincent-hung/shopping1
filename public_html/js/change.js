@@ -146,7 +146,7 @@ function calculate(){
 	tax = tax.toFixed(2);
 	total = total.toFixed(2);
 
-	document.getElementById("subtotal").innerHTML = "Subtotal: $" + subtotal;
-	document.getElementById("tax").innerHTML = "Tax: $" + tax;
-	document.getElementById("total").innerHTML = "Total: $" + total;
+	document.getElementById("textField1").value = subtotal;
+	document.getElementById("textField2").value = tax;
+	document.getElementById("textField3").value = total;
 }
