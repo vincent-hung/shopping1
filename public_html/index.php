@@ -341,39 +341,24 @@
             <p id = "subtotal">Subtotal: $0.00</p>
             <p id = "tax">Tax: $0.00</p>
             <p id = "total">Total: $0.00</p>
-        </div>
-        <br>
-        <br>
-        <br>
+
 
         <form action="" method="POST">
-        <button id="customButton" class="btn btn-primary">Pay</button>
-    
-        <script>
-               $('#customButton').click(function(){
-                 var token = function(res){
-                   var $input = $('<input type=hidden name=stripeToken />').val(res.id);
-                   $('form').append($input).submit();
-                 };
-
-                   var cost;
-                   var cost = getC();
-                
-                 StripeCheckout.open({
-                   key:         'pk_test_O4pwxsOKukpCDGYSWmFJvYp3',
-                   amount:      cost,
-                   currency:    'cad',
-                   name:        'Blue Clothing & Leather',
-                   description: 'Card Payment',
-                   panelLabel:  'Checkout',
-                   token:       token
-                 });
-
-                 return false;
-               });
-             </script>
-             </form>
+          <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="pk_test_O4pwxsOKukpCDGYSWmFJvYp3"
+            data-amount="999"
+            data-name="Blue Clothing & Leather"
+            data-description="Card Payment"
+            data-image="/img/documentation/checkout/marketplace.png"
+            data-locale="auto"
+            data-currency="cad">
+          </script>
+        </form>
+         </div>
     </div>
+
+    <br>
 
     <div class="container" id="contact">
 

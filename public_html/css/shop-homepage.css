@@ -51,6 +51,7 @@ body {
     color: #333;
 }
 
+#status,
 #suitbuy,
 #tiebuy,
 #shoesbuy,
@@ -58,12 +59,14 @@ body {
 #hatbuy,
 #watchbuy{
     text-align:left;
+    color: #0061e9;
 }
 
 #subtotal,
 #tax,
 #total{
     text-align: right;
+    color: #5a009c;;
 }
 
 .item{
@@ -84,7 +87,14 @@ body {
 #con{
     color:#008385;
 }
+#contact{
+    color: #00409d;
+}
 
-#checkout{
-    float: right;
+.thumbnail p{
+    color: #003985;
+}
+
+.thumbnail h4{
+    color: #005edb;
 }

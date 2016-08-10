@@ -107,7 +107,7 @@ function calculate(){
 	}
 
 	if (belt1 > 0){
-		totalbelt = belt1*49.99;
+		totalbelt = belt1*5.99;
 		totalbelt = totalbelt.toFixed(2);
 		document.getElementById("beltbuy").innerHTML = belt1 + " x belt     " + "$" + totalbelt;
 	} else {
@@ -116,7 +116,7 @@ function calculate(){
 	}
 
 	if (hat1 > 0){
-		totalhat = hat1*49.99;
+		totalhat = hat1*9.99;
 		totalhat = totalhat.toFixed(2);
 		document.getElementById("hatbuy").innerHTML = hat1 + " x hat      " +  "$" + totalhat;
 	} else {
@@ -125,7 +125,7 @@ function calculate(){
 	}
 
 	if (watch1 > 0){
-		totalwatch = watch1*49.99;
+		totalwatch = watch1*39.99;
 		totalwatch = totalwatch.toFixed(2);
 		document.getElementById("watchbuy").innerHTML = watch1 + " x watch    " + "$" + totalwatch;
 	} else {
@@ -149,8 +149,4 @@ function calculate(){
 	document.getElementById("subtotal").innerHTML = "Subtotal: $" + subtotal;
 	document.getElementById("tax").innerHTML = "Tax: $" + tax;
 	document.getElementById("total").innerHTML = "Total: $" + total;
-}
-
-function getC(){
-	return total*100;
 }
