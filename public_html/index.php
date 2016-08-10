@@ -346,8 +346,8 @@
 
 
     <script src="https://checkout.stripe.com/checkout.js"></script>
-    <button id="customButton ">Purchase</button>
-    <script>
+    <button id="customButton">Purchase</button>
+    <script type="text/javascript">
       var handler = StripeCheckout.configure({
         key: 'pk_test_O4pwxsOKukpCDGYSWmFJvYp3',
         token: function(token) {
