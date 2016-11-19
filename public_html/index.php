@@ -12,10 +12,10 @@
     <title>Blue Clothing & Leather</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
+    <link href="css/shop-homepage.css" type="text/css" rel="stylesheet">
 
     <script src="js/change.js"></script>
 
