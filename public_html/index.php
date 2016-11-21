@@ -405,6 +405,8 @@
 
 
     <?php
+    require_once '../vendor/autoload.php';
+    use Stripe/Stripe;
     // Set your secret key: remember to change this to your live secret key in production
     // See your keys here https://dashboard.stripe.com/account/apikeys
     \Stripe\Stripe::setApiKey("sk_test_BQokikJOvBiI2HlWgH4olfQ2");

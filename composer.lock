@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7441bac04b0909748e4ab883fd0d1ff9",
-    "content-hash": "b54b5e1f3debec63e919e0fcb72e35c5",
+    "content-hash": "3f4203bc6057e17faeb701bf3536402c",
     "packages": [
         {
             "name": "parse/php-sdk",
@@ -58,7 +57,7 @@
                 "parse",
                 "sdk"
             ],
-            "time": "2016-07-01 23:38:47"
+            "time": "2016-07-01T23:38:47+00:00"
         },
         {
             "name": "sendgrid/php-http-client",
@@ -110,7 +109,7 @@
                 "rest",
                 "sendgrid"
             ],
-            "time": "2016-06-11 00:47:24"
+            "time": "2016-06-11T00:47:24+00:00"
         },
         {
             "name": "sendgrid/sendgrid",
@@ -156,7 +155,62 @@
                 "send",
                 "sendgrid"
             ],
-            "time": "2016-07-08 02:55:23"
+            "time": "2016-07-08T02:55:23+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "9d76444550a09a6f9c55dd98113ba0901908e60a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/9d76444550a09a6f9c55dd98113ba0901908e60a",
+                "reference": "9d76444550a09a6f9c55dd98113ba0901908e60a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0",
+                "satooshi/php-coveralls": "~0.6.1",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stripe\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "time": "2015-07-07T01:13:32+00:00"
         }
     ],
     "packages-dev": [],
